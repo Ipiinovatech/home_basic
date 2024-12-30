@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Brain, Cpu, Database, Lock } from 'lucide-react';
-import { Link } from 'react-scroll';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useEffect, useRef } from 'react';
 
@@ -17,41 +15,6 @@ export default function HeroSection() {
       });
     }
   }, []);
-
-  const features = [
-    {
-      icon: <Brain className="h-6 w-6 text-white" />,
-      title: language === 'es' ? 'IA Avanzada' : 'Advanced AI',
-      description:
-        language === 'es'
-          ? 'Tecnología de punta para potenciar tu negocio'
-          : 'Cutting-edge technology to power your business',
-    },
-    {
-      icon: <Database className="h-6 w-6 text-white" />,
-      title: language === 'es' ? 'Gestión de Datos' : 'Data Management',
-      description:
-        language === 'es'
-          ? 'Organización inteligente de información'
-          : 'Intelligent information organization',
-    },
-    {
-      icon: <Lock className="h-6 w-6 text-white" />,
-      title: language === 'es' ? 'Seguridad Total' : 'Total Security',
-      description:
-        language === 'es'
-          ? 'Protección avanzada de datos'
-          : 'Advanced data protection',
-    },
-    {
-      icon: <Cpu className="h-6 w-6 text-white" />,
-      title: language === 'es' ? 'Automatización' : 'Automation',
-      description:
-        language === 'es'
-          ? 'Procesos optimizados e inteligentes'
-          : 'Optimized and intelligent processes',
-    },
-  ];
 
   return (
     <section
@@ -88,34 +51,59 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
               className="max-w-3xl mx-auto w-full"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6 sm:mb-8">
-                <span className="text-white">
-                  {language === 'es' ? 'IPINNOVATECH' : 'IPINNOVATECH'}
-                </span>
-                <br />
-                <span className="text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                  {language === 'es'
-                    ? 'Con su Red Multiservicios de IA'
-                    : 'With its AI Multiservice Network'}
-                </span>
-              </h1>
-
-              <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white/80 bg-black/30 backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-2xl mb-6 sm:mb-8 border border-white/10">
-                {language === 'es'
-                  ? 'De la idea a la innovacion tecnologica'
-                  : 'from idea to technological innovation'}
-              </p>
+              {/* Contenedor Flex para Logo y Título */}
+              <div className="flex items-center justify-center md:justify-start md:flex-row flex-col mb-6 sm:mb-8 w-full">
+                {/* Logo visible solo en pantallas grandes */}
+                <img
+                  src="/Images/Varios/Logo_Transparente_png.png" // Ruta correcta del logo
+                  alt="Logo"
+                  className="hidden md:block h-auto w-48 sm:w-64 lg:w-80 max-w-xs" // Logo visible en pantallas grandes
+                />
+                {/* Contenido de texto visible solo en pantallas grandes */}
+                <div className="hidden md:block ml-4">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
+                    {language === 'es' ? 'IPINNOVATECH' : 'IPINNOVATECH'}
+                  </h1>
+                  <span className="text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl block mt-2">
+                    {language === 'es'
+                      ? 'Con su Red Multiservicios de IA'
+                      : 'With its AI Multiservice Network'}
+                  </span>
+                  <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white/80 mt-4 italic">
+                    {/* Cambié la frase y la hice cursiva */}
+                    {language === 'es'
+                      ? 'De la idea a la transformación digital'
+                      : 'From idea to digital transformation'}
+                  </p>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Features Grid */}
+            {/* Features Grid - Se oculta en pantallas móviles */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16 lg:mt-20"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16 lg:mt-20 hidden md:grid"
             ></motion.div>
           </div>
         </div>
+      </div>
+
+      {/* Mobile view adjustments */}
+      <div className="md:hidden flex flex-col items-center justify-center w-full absolute inset-0 z-10">
+        {/* Logo visible solo en pantallas móviles */}
+        <img
+          src="/Images/Varios/Logo_Transparente_png.png"
+          alt="Logo"
+          className="h-auto w-48 sm:w-64 lg:w-80 max-w-xs mb-4" // Tamaño más grande en móvil
+        />
+        {/* Texto visible solo en pantallas móviles y en cursiva */}
+        <p className="text-lg sm:text-xl md:text-2xl font-medium leading-relaxed text-white/80 italic">
+          {language === 'es'
+            ? 'De la idea a la transformación digital'
+            : 'From idea to digital transformation'}
+        </p>
       </div>
     </section>
   );
